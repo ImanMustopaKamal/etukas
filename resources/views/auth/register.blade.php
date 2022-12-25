@@ -1,9 +1,9 @@
 <x-guest-layout>
   <x-auth-card>
     <x-slot name="logo">
-      <!-- <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a> -->
+      <a href="/">
+        <div class="brand-logo" style="width: 100px; height: 100px;"></div>
+      </a>
     </x-slot>
 
     <!-- Validation Errors -->
@@ -11,6 +11,7 @@
 
     <form method="POST" action="{{ route('register') }}">
       @csrf
+      <h4>Selamat</h4>
 
       <!-- Name -->
       <div>

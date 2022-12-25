@@ -43,4 +43,19 @@ class User extends Authenticatable
   protected $casts = [
     'email_verified_at' => 'datetime',
   ];
+
+  public function getRedirectRoute()
+  {
+    if ((int)$this->role_id === 3) {
+      return 'student.timetable';
+    } else if ((int)$this->role_id === 4) {
+      return 'teacher.timetable';
+    }else{
+      return '';
+    }
+    // return match ((int)$this->role_id) {
+    //   3 => 'student.timetable',
+    //   4 => 'teacher.timetable',
+    // };
+  }
 }

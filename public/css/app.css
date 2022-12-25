@@ -104,7 +104,9 @@ strong {
 1. Use the user's configured `mono` font family by default.
 2. Correct the odd `em` font sizing in all browsers.
 */
-
+select[name="table_length"] {
+  width: 60px;
+}
 code,
 kbd,
 samp,
@@ -636,6 +638,14 @@ select {
 }
 .container {
   width: 100%;
+}
+.brand-logo {
+  background: url("../img/logo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
 }
 @media (min-width: 640px) {
 

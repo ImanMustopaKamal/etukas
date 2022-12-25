@@ -1,10 +1,9 @@
-<x-app-layout>
+<x-teacher-layout>
   <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-4">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Library</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Data</li>
+        <li class="breadcrumb-item active" aria-current="page">Timetable</li>
       </ol>
     </nav>
   </div>
@@ -18,4 +17,4 @@
       </div>
     </div>
   </div>
-</x-app-layout>
+</x-teacher-layout>
