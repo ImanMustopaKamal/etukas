@@ -36,9 +36,23 @@
               <tr>
                 <td>{{ $idx+1 }}</td>
                 <td>{{ $item->name }}</td>
-                <td>{{ $item->name }}</td>
-                <td>{{ $item->name }}</td>
-                <td>{{ $item->id }}</td>
+                <td>{{ $item->question_count }} Soal</td>
+                <td>{{ $item->minutes }} Menit</td>
+                <td>
+                  <a href="{{ url('teacher/task/'.$item->slug) }}">
+                    <button type="button" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Tes">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                  </a>
+                  <a href="{{ url('teacher/task/detail/'.$item->slug) }}">
+                    <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah Soal">
+                      <i class="fa-solid fa-list-check"></i>
+                    </button>
+                  </a>
+                  <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Tes" onclick="deleteTask('{{ $item->id }}')">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
               </tr>
               @endforeach
             </tbody>
@@ -48,4 +62,8 @@
     </div>
   </div>
 </x-teacher-layout>
+<script>
+  const url = "{{ route('teacher.task') }}";
+  const urlDelete = "{{ url('teacher/task') }}";
+</script>
 <script src="{{ asset('js/task.js') }}"></script>

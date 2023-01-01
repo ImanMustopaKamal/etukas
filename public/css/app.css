@@ -768,6 +768,22 @@ select {
 .grid {
   display: grid;
 }
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(10, auto);
+  grid-gap: 10px;
+}
+.grid-item {
+  width: 40px;
+  height: 40px;
+  /* background: #979797;  */
+  border-radius: 8px;
+}
+.grid-item button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
 .hidden {
   display: none;
 }
@@ -1372,8 +1388,12 @@ select {
     color: rgb(156 163 175 / var(--tw-text-opacity));
   }
 }
+@media(max-width: 640px) {
+  .grid-container {
+    grid-template-columns: repeat(7, auto);
+  }
+}
 @media (min-width: 640px) {
-
   .sm\:-my-px {
     margin-top: -1px;
     margin-bottom: -1px;
