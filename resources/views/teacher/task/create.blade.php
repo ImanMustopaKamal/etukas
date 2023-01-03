@@ -52,4 +52,4 @@
   const url = "{{ route('teacher.task') }}";
   const urlStore = "{{ route('teacher.task_store') }}";
 </script>
-<script src="{{ asset('js/task.js') }}"></script>
+<script src="{{ asset('js/task/create.js') }}"></script>

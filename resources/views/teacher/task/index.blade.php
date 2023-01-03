@@ -66,4 +66,4 @@
   const url = "{{ route('teacher.task') }}";
   const urlDelete = "{{ url('teacher/task') }}";
 </script>
-<script src="{{ asset('js/task.js') }}"></script>
+<script src="{{ asset('js/task/index.js') }}"></script>

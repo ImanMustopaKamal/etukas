@@ -1,6 +1,5 @@
 $(function () {
     var dateNow = new Date();
-    $("#table").DataTable();
     $("#start_at").on("click", function () {
         $(this).datetimepicker({
             defaultDate: dateNow,
@@ -63,8 +62,8 @@ $("#store").on("click", function (e) {
                 },
             }
         )
-        .then((respose) => {
-            const payload = respose.data;
+        .then((response) => {
+            const payload = response.data;
             if (payload.status !== 200) {
                 Swal.fire({
                     icon: "error",
@@ -127,8 +126,8 @@ $("#update").on("click", function (e) {
                 },
             }
         )
-        .then((respose) => {
-            const payload = respose.data;
+        .then((response) => {
+            const payload = response.data;
             if (payload.status !== 200) {
                 Swal.fire({
                     icon: "error",
@@ -195,8 +194,8 @@ $("#store_question").on("click", function () {
                 },
             }
         )
-        .then((respose) => {
-            const payload = respose.data;
+        .then((response) => {
+            const payload = response.data;
             if (payload.status === 200) {
                 Swal.fire({
                     icon: "success",
@@ -214,60 +213,9 @@ $("#store_question").on("click", function () {
             }
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err);
         });
 });
-
-function deleteTask(id) {
-    Swal.fire({
-        title: "Anda yakin?",
-        text: "Menghapus tes",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, hapus!",
-        cancelButtonText: "Batal",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            axios
-                .delete(urlDelete + "/" + id, null, {
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                            "content"
-                        ),
-                    },
-                })
-                .then((respose) => {
-                    const payload = respose.data;
-                    if (payload.status !== 200) {
-                        Swal.fire({
-                            icon: "error",
-                            title: payload.message,
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                    } else {
-                        $("#name").val("");
-                        $("#start_at").val("");
-                        $("#end_at").val("");
-
-                        Swal.fire({
-                            icon: "success",
-                            title: payload.message,
-                            timer: 1500,
-                        }).then((res) => {
-                            location.href = url;
-                        });
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                    Swal.fire(err);
-                });
-        }
-    });
-}
 
 function readQuestion(no) {
     $(".question").removeClass("btn-success");
@@ -297,8 +245,8 @@ function readQuestion(no) {
                 },
             }
         )
-        .then((respose) => {
-            const payload = respose.data;
+        .then((response) => {
+            const payload = response.data;
             if (payload.status === 200) {
                 if (payload.data !== null) {
                     $("#question").val(payload.data.questions);
@@ -320,3 +268,40 @@ function readQuestion(no) {
             console.log(err);
         });
 }
+
+$("#import-store").on("click", function () {
+    var formData = new FormData();
+    var imagefile = document.querySelector("#file");
+    formData.append("file", imagefile.files[0]);
+    formData.set("task_id", $("#task_id").val());
+    axios
+        .post(urlImport, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        })
+        .then((response) => {
+            const payload = response.data;
+            if (payload.status !== 200) {
+                Swal.fire({
+                    icon: "error",
+                    title: payload.message,
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            } else {
+                Swal.fire({
+                    icon: "success",
+                    title: payload.message,
+                    timer: 1500,
+                }).then((res) => {
+                    location.href = url;
+                });
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            Swal.fire(err);
+        });
+});

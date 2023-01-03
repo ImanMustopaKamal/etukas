@@ -26,6 +26,8 @@ Route::middleware(['auth', 'verified', 'role:4'])
       ->name('task_question');
     Route::post('/task/question/store', [Teacher\TaskController::class, 'questionStore'])
       ->name('task_question_store');
+    Route::post('/task/import/store', [Teacher\TaskController::class, 'importStore'])
+      ->name('import_store');
     Route::delete('/task/{id}', [Teacher\TaskController::class, 'delete'])
       ->name('task_delete');
   });

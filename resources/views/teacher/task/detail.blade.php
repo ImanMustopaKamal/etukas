@@ -18,10 +18,12 @@
                 Import&nbsp;
                 <i class="fa-solid fa-file-excel"></i>
               </button>
-              <button class="btn btn-primary">
-                Format&nbsp;
-                <i class="fa-solid fa-download"></i>
-              </button>
+              <a href="{{ asset('asset/question.xlsx') }}">
+                <button class="btn btn-primary">
+                  Format&nbsp;
+                  <i class="fa-solid fa-download"></i>
+                </button>
+              </a>
             </div>
           </div>
           <div class="row py-2 mb-4">
@@ -93,11 +95,17 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+          <div class="alert alert-info" role="alert">
+            import file excel dengan mengikuti format, dan pastikan jumlah soal sesuai
+          </div>
+          <div class="mb-3">
+            <label for="file" class="form-label">File</label>
+            <input accept=".xls,.xlsx" class="form-control form-control-sm" id="file" name="file" type="file">
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-primary" id="import-store">Submit</button>
         </div>
       </div>
     </div>
@@ -107,5 +115,6 @@
   const url = "{{ route('teacher.task') }}";
   const urlQuestion = "{{ url('teacher/task/question/get') }}";
   const urlQuestionStore = "{{ route('teacher.task_question_store') }}";
+  const urlImport = "{{ route('teacher.import_store') }}";
 </script>
 <script src="{{ asset('js/task.js') }}"></script>

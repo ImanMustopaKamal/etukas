@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use Excel;
 use Validator;
+use Exception;
+use stdClass;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+
+use App\Imports\ImportsQuestion;
+
 use App\Models\Task;
 use App\Helpers\Helpers;
 use App\Models\Answer;
@@ -156,17 +163,17 @@ class TaskController extends Controller
       $question->nomor = $request->nomor;
       $question->save();
     }
-    
+
     $answer1 = Answer::where('question_id', $question->id)
       ->where('alphabet', 'a')
       ->first();
 
-    if($answer1) {
+    if ($answer1) {
       $answer1->alphabet = 'a';
       $answer1->answer = $request->answertext1;
       $answer1->is_true = $request->isTrue == 'a' ? true : false;
       $answer1->save();
-    }else{
+    } else {
       $answer1 = new Answer;
 
       $answer1->question_id = $question->id;
@@ -180,12 +187,12 @@ class TaskController extends Controller
       ->where('alphabet', 'b')
       ->first();
 
-    if($answer2) {
+    if ($answer2) {
       $answer2->alphabet = 'b';
       $answer2->answer = $request->answertext2;
       $answer2->is_true = $request->isTrue == 'b' ? true : false;
       $answer2->save();
-    }else{
+    } else {
       $answer2 = new Answer;
 
       $answer2->question_id = $question->id;
@@ -199,12 +206,12 @@ class TaskController extends Controller
       ->where('alphabet', 'c')
       ->first();
 
-    if($answer3) {
+    if ($answer3) {
       $answer3->alphabet = 'c';
       $answer3->answer = $request->answertext3;
       $answer3->is_true = $request->isTrue == 'c' ? true : false;
       $answer3->save();
-    }else{
+    } else {
       $answer3 = new Answer;
 
       $answer3->question_id = $question->id;
@@ -218,12 +225,12 @@ class TaskController extends Controller
       ->where('alphabet', 'd')
       ->first();
 
-    if($answer4) {
+    if ($answer4) {
       $answer4->alphabet = 'd';
       $answer4->answer = $request->answertext4;
       $answer4->is_true = $request->isTrue == 'd' ? true : false;
       $answer4->save();
-    }else{
+    } else {
       $answer4 = new Answer;
 
       $answer4->question_id = $question->id;
@@ -234,5 +241,32 @@ class TaskController extends Controller
     }
 
     return response()->json(["message" => "Berhasil menambahkan pertanyaan", "status" => 200], 200);
+  }
+
+  public function importStore(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'file' => 'required|mimes:csv,xls,xlsx',
+      'task_id' => 'required'
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(['message' => strip_tags($validator->errors()->first()), 'status' => 400, 'data' => null], 200);
+    }
+
+    $file = $request->file('file');
+    if ($file) {
+      try {
+        $data = new stdClass;
+        $data->uniqid = uniqid();
+        $data->id = $request->task_id;
+
+        Excel::import(new ImportsQuestion($data), $file);
+      } catch (Exception $e) {
+        return response()->json(['message' => $e->getMessage(), 'status' => 400], 200);
+      }
+    }
+
+    return response()->json(['message' => 'berhasil import', 'status' => 200], 200);
   }
 }

@@ -58,4 +58,4 @@
   const url = "{{ route('teacher.task') }}";
   const urlUpdate = "{{ route('teacher.task_update') }}";
 </script>
-<script src="{{ asset('js/task.js') }}"></script>
+<script src="{{ asset('js/task/edit.js') }}"></script>
