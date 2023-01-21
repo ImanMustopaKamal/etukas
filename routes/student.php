@@ -7,6 +7,11 @@ Route::middleware(['auth', 'verified', 'role:3'])
   ->prefix('student')
   ->name('student.')
   ->group(function () {
+    Route::get('/task', [Student\TaskController::class, 'index'])
+      ->name('task');
+    Route::get('/task/{slug}', [Student\TaskController::class, 'detail'])
+      ->name('task_detail');
+
     Route::get('/timetable', [Student\TimetableController::class, 'index'])
       ->name('timetable');
     // Later we may add:

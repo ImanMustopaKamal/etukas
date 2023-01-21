@@ -5,45 +5,39 @@
     <li class="breadcrumb-item active">Tambah</li>
   </x-breadcrumb>
 
-  <div class="py-8">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 bg-white border-b border-gray-200">
-          <div class="row justify-content-between py-2 mb-4">
-            <div class="col-md-8">
-              <h2>Tambah Data</h2>
-            </div>
-            <div class="col-md-4 text-end">
+  <div class="card" style="padding: 20px;">
+    <div class="row justify-content-between py-2 mb-4">
+      <div class="col-md-8">
+        <h2>Tambah Data</h2>
+      </div>
+      <div class="col-md-4 text-end">
 
-            </div>
+      </div>
+    </div>
+    <div class="row justify-content-between py-2 mb-4">
+      <div class="mb-3">
+        <label class="form-label">Nama Tes</label>
+        <input autofocus type="text" class="form-control" id="name" name="name" placeholder="Masukkan Nama Tes">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Jumlah Soal</label>
+        <input autofocus type="number" class="form-control" id="question_count" name="question_count" placeholder="Masukkan Jumlah Soal" value="0">
+      </div>
+      <div class="mb-3">
+        <div class="row">
+          <div class="col">
+            <label class="form-label">Tanggal Mulai</label>
+            <input type='text' name="start_at" id="start_at" class="form-control" style="margin-bottom: 20px;" placeholder="Masukkan Tanggal Mulai" />
           </div>
-          <div class="row justify-content-between py-2 mb-4">
-            <div class="mb-3">
-              <label class="form-label">Nama Tes</label>
-              <input autofocus type="text" class="form-control" id="name" name="name" placeholder="Masukkan Nama Tes">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Jumlah Soal</label>
-              <input autofocus type="number" class="form-control" id="question_count" name="question_count" placeholder="Masukkan Jumlah Soal" value="0">
-            </div>
-            <div class="mb-3">
-              <div class="row">
-                <div class="col">
-                  <label class="form-label">Tanggal Mulai</label>
-                  <input type='text' name="start_at" id="start_at" class="form-control" style="margin-bottom: 20px;" placeholder="Masukkan Tanggal Mulai" />
-                </div>
-                <div class="col">
-                  <label class="form-label">Tanggal Berakhir</label>
-                  <input type='text' name="end_at" id="end_at" class="form-control" style="margin-bottom: 20px;" placeholder="Masukkan Tanggal Berakhir" />
-                </div>
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <button type="button" class="btn btn-primary" id="store">Submit</button>
-            </div>
+          <div class="col">
+            <label class="form-label">Tanggal Berakhir</label>
+            <input type='text' name="end_at" id="end_at" class="form-control" style="margin-bottom: 20px;" placeholder="Masukkan Tanggal Berakhir" />
           </div>
         </div>
+      </div>
+
+      <div class="mb-3">
+        <button type="button" class="btn btn-primary" id="store">Submit</button>
       </div>
     </div>
   </div>

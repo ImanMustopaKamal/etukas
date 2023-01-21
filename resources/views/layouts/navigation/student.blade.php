@@ -15,6 +15,9 @@
           <!-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
             {{ __('Dashboard') }}
           </x-nav-link> -->
+          <x-nav-link :href="route('student.home')" :active="request()->routeIs('student.home')">
+            {{ __('Home') }}
+          </x-nav-link>
           <x-nav-link :href="route('student.timetable')" :active="request()->routeIs('student.timetable')">
             {{ __('Timetable') }}
           </x-nav-link>
@@ -67,6 +70,9 @@
       <!-- <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
         {{ __('Dashboard') }}
       </x-responsive-nav-link> -->
+      <x-responsive-nav-link :href="route('student.home')" :active="request()->routeIs('student.home')">
+        {{ __('Timetable') }}
+      </x-responsive-nav-link>
       <x-responsive-nav-link :href="route('student.timetable')" :active="request()->routeIs('student.timetable')">
         {{ __('Timetable') }}
       </x-responsive-nav-link>

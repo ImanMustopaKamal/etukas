@@ -47,7 +47,7 @@ class User extends Authenticatable
   public function getRedirectRoute()
   {
     if ((int)$this->role_id === 3) {
-      return 'student.timetable';
+      return 'student.task';
     } else if ((int)$this->role_id === 4) {
       return 'teacher.timetable';
     }else{
