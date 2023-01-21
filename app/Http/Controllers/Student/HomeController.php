@@ -15,7 +15,10 @@ class HomeController extends Controller
 {
   public function index()
   {
-    $task = Task::where('is_active', 1)->get();
+    $task = Task::where('is_active', 1)
+      ->where('start_at', '<=', $this->date)
+      ->where('end_at', '>=', $this->date)
+      ->get();
 
     foreach ($task as $item) {
       $item->is_answer = false;

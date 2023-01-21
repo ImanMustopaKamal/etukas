@@ -115,6 +115,25 @@ class ImportsQuestion implements ToCollection, WithHeadingRow
         $answer4->is_true = (strtolower($row['jawaban']) == '') ? false : ((strtolower($row['jawaban']) == 'd') ? true : false);
         $answer4->save();
       }
+
+      $answer5 = Answer::where('question_id', $question->id)
+        ->where('alphabet', 'e')
+        ->first();
+
+      if ($answer5) {
+        $answer5->alphabet = 'e';
+        $answer5->answer = $row['pilihan_e'];
+        $answer5->is_true = (strtolower($row['jawaban']) == '') ? false : ((strtolower($row['jawaban']) == 'e') ? true : false);
+        $answer5->save();
+      } else {
+        $answer5 = new Answer;
+
+        $answer5->question_id = $question->id;
+        $answer5->alphabet = 'e';
+        $answer5->answer = $row['pilihan_e'];
+        $answer5->is_true = (strtolower($row['jawaban']) == '') ? false : ((strtolower($row['jawaban']) == 'e') ? true : false);
+        $answer5->save();
+      }
     }
   }
 }

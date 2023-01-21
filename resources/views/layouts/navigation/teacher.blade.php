@@ -26,5 +26,12 @@
         <div data-i18n="Analytics">Tes</div>
       </a>
     </li>
+
+    <li class="menu-item {{ request()->is('teacher/result') ? 'active' : (request()->is('teacher/result/*') ? 'active' : '') }}">
+      <a href="{{ route('teacher.result') }}" class="menu-link">
+        <!-- <i class="menu-icon tf-icons bx bx-home-circle"></i> -->
+        <div data-i18n="Analytics">Hasil Ujian</div>
+      </a>
+    </li>
   </ul>
 </aside>

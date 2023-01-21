@@ -270,6 +270,7 @@ function readQuestion(no) {
 }
 
 $("#import-store").on("click", function () {
+    $("#import-store").html("Processing");
     var formData = new FormData();
     var imagefile = document.querySelector("#file");
     formData.append("file", imagefile.files[0]);
@@ -282,6 +283,8 @@ $("#import-store").on("click", function () {
             },
         })
         .then((response) => {
+            $("#import-store").html("Submit");
+            $('#exampleModal').modal('toggle');
             const payload = response.data;
             if (payload.status !== 200) {
                 Swal.fire({

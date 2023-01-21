@@ -64,6 +64,13 @@
             <span class="input-group-text">D</span>
             <textarea class="form-control" name="answer-text4" id="answer-text4" aria-label="With textarea"></textarea>
           </div>
+          <div class="input-group mb-3">
+            <div class="input-group-text">
+              <input class="form-check-input mt-0" type="radio" name="answer" id="answer5" value="e">
+            </div>
+            <span class="input-group-text">E</span>
+            <textarea class="form-control" name="answer-text5" id="answer-text5" aria-label="With textarea"></textarea>
+          </div>
         </div>
         <div class="mb-3">
           <button type="button" class="btn btn-primary" id="store_question">Submit</button>

@@ -10,13 +10,16 @@ use stdClass;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 use App\Imports\ImportsQuestion;
+use App\Exports\ExportResult;
 
 use App\Models\Task;
 use App\Helpers\Helpers;
 use App\Models\Answer;
 use App\Models\Question;
+use App\Models\User;
 
 class TaskController extends Controller
 {
@@ -138,6 +141,7 @@ class TaskController extends Controller
       'answertext2' => 'required',
       'answertext3' => 'required',
       'answertext4' => 'required',
+      'answertext5' => 'required',
       'nomor' => 'required',
       'isTrue' => 'required',
     ]);
@@ -240,6 +244,21 @@ class TaskController extends Controller
       $answer4->save();
     }
 
+    if ($answer4) {
+      $answer4->alphabet = 'e';
+      $answer4->answer = $request->answertext5;
+      $answer4->is_true = $request->isTrue == 'e' ? true : false;
+      $answer4->save();
+    } else {
+      $answer4 = new Answer;
+
+      $answer4->question_id = $question->id;
+      $answer4->alphabet = 'e';
+      $answer4->answer = $request->answertext5;
+      $answer4->is_true = $request->isTrue == 'e' ? true : false;
+      $answer4->save();
+    }
+
     return response()->json(["message" => "Berhasil menambahkan pertanyaan", "status" => 200], 200);
   }
 
@@ -268,5 +287,42 @@ class TaskController extends Controller
     }
 
     return response()->json(['message' => 'berhasil import', 'status' => 200], 200);
+  }
+
+  public function result()
+  {
+    $task = Task::withCount(['userTasks'])->where('is_active', 1)->get();
+
+    return view('teacher.task.result', compact('task'));
+  }
+
+  public function exportPdf($slug)
+  {
+    $task = Task::where('slug', $slug)->first();
+    if(!$task) {
+      abort(404);
+    }
+
+    $payload = new stdClass;
+    $payload->soal = $task->question_count;
+    $payload->id = $task->id;
+    $payload->uniqid = uniqid();
+
+    return Excel::download(new ExportResult($payload), $task->name.'.pdf', \Maatwebsite\Excel\Excel::MPDF);
+  }
+
+  public function exportExcel($slug)
+  {
+    $task = Task::where('slug', $slug)->first();
+    if(!$task) {
+      abort(404);
+    }
+
+    $payload = new stdClass;
+    $payload->soal = $task->question_count;
+    $payload->id = $task->id;
+    $payload->uniqid = uniqid();
+
+    return Excel::download(new ExportResult($payload), $task->name.'.xlsx');
   }
 }

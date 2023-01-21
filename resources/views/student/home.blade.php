@@ -5,7 +5,7 @@
 
   <div class="row justify-content-center py-2 mb-4">
     <div class="col-md-12 d-flex-center">
-      <div class="alert alert-light" role="alert">
+      <div class="alert alert-info" role="alert">
         <h2 class="alert-heading mb-3">Informasi</h2>
         <p>
           Silahakan pilih Tes yang diikuti dari daftar tes yang tersedia dibawah ini. Apabila tes tidak muncul, silahkan menghubungi Operator yang bertugas.
@@ -34,7 +34,7 @@
             <td>{{ $item->question_count }} Soal</td>
             <td>{{ $item->minutes }} Menit</td>
             <td>
-              @if($item->is_answer)
+              @if($item->userTask != null)
               <button type="button" class="btn btn-secondary">
                 <i class="fa-solid fa-pen-to-square"></i>
                 Sudah Kerjakan

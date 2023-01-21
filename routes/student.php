@@ -11,6 +11,14 @@ Route::middleware(['auth', 'verified', 'role:3'])
       ->name('task');
     Route::get('/task/{slug}', [Student\TaskController::class, 'detail'])
       ->name('task_detail');
+    Route::get('/task/data/{task_id}', [Student\TaskController::class, 'dataDetail'])
+      ->name('task_dataDetail');
+    Route::post('/task/question/get', [Student\TaskController::class, 'question'])
+      ->name('task_question');
+    Route::post('/task/answer', [Student\TaskController::class, 'answer'])
+      ->name('task_answer');
+    Route::post('/task/start', [Student\TaskController::class, 'start'])
+      ->name('task_start');
 
     Route::get('/timetable', [Student\TimetableController::class, 'index'])
       ->name('timetable');

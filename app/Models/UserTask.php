@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserAnswer extends Model
+class UserTask extends Model
 {
   use HasFactory;
 
-  protected $fillable = ['user_id', 'task_id', 'question_id', 'answer_id', 'not_sure', 'created_at', 'updated_at'];
+  protected $fillable = ['user_id', 'task_id', 'created_at', 'updated_at'];
 }

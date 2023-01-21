@@ -15,11 +15,21 @@ class Task extends Model
 
   public function questions()
   {
-    return $this->belongsTo('App\Models\Question', 'task_id', 'id');
+    return $this->hasMany('App\Models\Question', 'task_id', 'id');
   }
 
   public function getMinutesAttribute()
   {
     return Helpers::DateRange($this->start_at, $this->end_at);
+  }
+
+  public function userTask()
+  {
+    return $this->belongsTo('App\Models\UserTask', 'id', 'task_id');
+  }
+
+  public function userTasks()
+  {
+    return $this->hasMany('App\Models\UserTask', 'task_id', 'id');
   }
 }

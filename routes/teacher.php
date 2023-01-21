@@ -7,8 +7,16 @@ Route::middleware(['auth', 'verified', 'role:4'])
   ->prefix('teacher')
   ->name('teacher.')
   ->group(function () {
-    Route::get('/timetable', [Teacher\TimetableController::class, 'index'])
+    Route::get('/home', [Teacher\TimetableController::class, 'index'])
       ->name('timetable');
+
+    Route::get('/result', [Teacher\TaskController::class, 'result'])
+      ->name('result');
+
+    Route::get('/task/pdf/{slug}', [Teacher\TaskController::class, 'exportPdf'])
+      ->name('export_pdf');
+    Route::get('/task/excel/{slug}', [Teacher\TaskController::class, 'exportExcel'])
+      ->name('export_excel');
 
     Route::get('/task', [Teacher\TaskController::class, 'index'])
       ->name('task');
