@@ -25,7 +25,7 @@ class AddColumnQuestionCount extends Migration
      */
     public function down()
     {
-        Schema::table('task', function (Blueprint $table) {
+        Schema::table('tasks', function (Blueprint $table) {
             $table->dropColumn('question_count');
         });
     }
